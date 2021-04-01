@@ -1,5 +1,6 @@
 import time as tps
 import curses
+titolo="PythonSnake"
 titre =['  _______     _________ _    _  ____  _   _    _____ _   _          _  ________ ',
         ' |  __ \ \   / |__   __| |  | |/ __ \| \ | |  / ____| \ | |   /\   | |/ |  ____|',
         ' | |__) \ \_/ /   | |  | |__| | |  | |  \| | | (___ |  \| |  /  \  |   /| |__   ',
@@ -35,39 +36,41 @@ def affichage_aire_de_jeu(hauteur, largeur, tit):
     # Affichage du titre
     win.addstr(0, 27, titre, curses.color_pair(1))
     # Raffraichissement de la fenêtre
-    win.____
+    win.refresh()
     # Emission d'un beep
-    curses.____
+    curses.beep()
     # retourner la fenêtre
-    return ____
-
-
-
-
-
-curses.initscr()
-affichage_aire_de_jeu(50, 50, titre)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    return win
 
 
 
 
 title()
+curses.initscr()
+curses.start_color()
+affichage_aire_de_jeu(20, 60, titolo)
+curses.napms(10000)
+curses.endwin()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
