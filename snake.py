@@ -42,6 +42,45 @@ def affichage_aire_de_jeu(hauteur, largeur, tit):
     # retourner la fenêtre
     return win
 
+def control(win, key, keys = [____]):
+	'''
+	Controles de jeu
+	paramètres :
+	  win : fenètre en cours
+	  key : dernière touche reconnue
+	  keys: liste des touches acceptées par défaut
+	retour :
+	  code de la touche reconnue
+	'''
+	# Sauvegarde de la dernière touche reconnue
+	old_key = key
+
+	# Aquisition d'un nouveau caractère depuis le clavier
+	key = win.getch()
+
+	# Si aucune touche actionnée (pas de nouveau caractère)
+	# ou pas dans la liste des touches acceptées
+	# key prend la valeur de la dernière touche connue
+	if key == None or key not in keys :
+		key = old_key
+
+	# Raffaichissement de la fenètre
+	win.refresh()
+
+	# retourne le code la touche
+	return key
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
