@@ -115,7 +115,7 @@ def jeu(win):
 	while key != 27 and not end:
 		key = controle(win, key)
 		snake, score = deplacement(win, score, key, snake, food)
-		end = perdu(win, snake)
+		end = False
 	return score
 
 
@@ -154,6 +154,46 @@ def deplacement(win, score, key, snake, food):
 	# la tête se déplace de 1 caractère vers le bas (ligne + 1)
 	elif key == KEY_DOWN:
 		snake.insert(0, [snake[0][0]+1, snake[0][1]])
+	
+	# si la serpent arrive au bord de la fenêtre (20 lignes x 60 colonnes)
+	if snake[0][0] == 0:
+		snake[0][0] = win.getmaxyx()[0]-2
+
+	if snake[0][1] == 0:
+		snake[0][1] = win.getmaxyx()[1]-2
+
+	if snake[0][0] == win.getmaxyx()[0]-1:
+	  snake[0][0] = 1
+
+	if snake[0][1] == win.getmaxyx()[1]-1:
+	  snake[0][1] = 1
+	
+	
+
+	# Suppression du dernier anneau du serpent.
+	# Sera conditionner plus tard au fait que le serpent mange ou pas une pomme
+	# Le score sera alors également mis à jour
+	food, snake, last, score = mange_pomme(win, food, snake, score)
+
+
+	# Affichage de la tête à sa nouvelle position en bleu sur fond jaune
+	win.addstr(snake[0][0], snake[0][1], '*', curses.color_pair(3))
+
+	# Effacement du dernier anneau : affichage du caractère "espace" sur fond noir
+	win.addstr(last[0], last[1], ' ', curses.color_pair(1))
+
+	# Affichage du score dans l'aire de jeu
+	win.addstr(0, 2, 'Score : ' + str(score) + ' ')
+
+	# Attendre avant le pas suivant
+	vitesse = plus_vite(score)
+	win.timeout(150//vitesse)
+
+	# tuple contenant :
+	# - la liste des positions en cours des anneaux du serpent
+	# - score en cours
+	return snake, score
+
 
 
 
